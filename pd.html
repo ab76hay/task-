@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritz-Craft Homes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- Custom Variables and General Styles --- */
+         body { font-family: 'Poppins', sans-serif; }
+     .navbar {
+      background-color: #ffffff;
+      border-top: 4px solid #1e73be; /* blue top border */
+      padding: 0.3rem 1rem;
+    }
+    .navbar-nav .nav-link {
+      color: #000;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 8px;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #1e73be;
+    }
+    .btn-fav {
+      background-color: #7a0a0a;
+      color: white;
+      font-size: 13px;
+      padding: 4px 10px;
+    }
+    .btn-login {
+      background-color: #8b0000;
+      color: white;
+      font-size: 13px;
+      padding: 4px 10px;
+    }
+    .btn-contact {
+      background-color: #007bff;
+      color: white;
+      font-size: 13px;
+      padding: 4px 10px;
+    }
+    .btn-contact:hover, .btn-login:hover, .btn-fav:hover {
+      opacity: 0.9;
+    }
+    .navbar-brand img {
+      height: 35px;
+    }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .btn-toggle {
+      margin: 5px;
+      padding: 12px 25px;
+      font-weight: 600;
+      border-radius: 8px;
+    }
+
+    .btn-buyer {
+      background-color: #8b0000;
+      color: #fff;
+    }
+
+    .btn-builder {
+      background-color: #004080;
+      color: #fff;
+    }
+
+    .search-bar {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .search-bar select, .search-bar input {
+      border-radius: 5px;
+    }
+
+    .search-btn {
+      background-color: #8b0000;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 5px;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+     :root {
+            --rc-blue: #001f5c; /* A deep blue for the background/text */
+            --rc-dark-blue: #00143d; /* Slightly darker for the "About Us" section background */
+            --rc-red: #8c1e28; /* The red used for the button */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        /* --- Section 1: Custom Building Simplified --- */
+        #custom-building {
+            padding-top: 5rem;
+            padding-bottom: 3rem;
+        }
+
+        .custom-building-text h1 {
+            color: var(--rc-blue);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .custom-building-image-container {
+            position: relative;
+            /* Placeholder to simulate the composite image style */
+        }
+
+        .custom-building-image-container img {
+            border-radius: 8px; /* Slight rounding on the corners */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        }
+
+
+        /* --- Section 3: About Us / It's Personal --- */
+        #about-us { background-color: var(--rc-blue); color: white; padding: 0; }
+        #about-us .content-col { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+        #about-us .content-col h2 { font-size: 2rem; font-weight: 700; }
+        #about-us .img-col { overflow: hidden; }
+        #about-us img { width: 100%; height: 100%; object-fit: cover; }
+        #about-us ul { list-style: none; padding-left: 0; margin-top: 1.5rem; }
+        #about-us ul li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
+        #about-us ul li::before { content: "✓"; color: white; font-weight: bold; position: absolute; left: 0; }
+
+        /* --- Section 4: Highest Quality Homes --- */
+        #highest-quality-homes { padding: 4rem 0; }
+        #highest-quality-homes h2 { color: var(--rc-blue); font-size: 2rem; font-weight: 700; }
+        #highest-quality-homes img { border-radius: 8px; }
+
+        /* --- Section 5: Faster Than Site Built --- */
+        #faster-site-built { background-color: var(--rc-blue); color: white; padding: 0; }
+        #faster-site-built .img-col { overflow: hidden; }
+        #faster-site-built img { width: 100%; height: 100%; object-fit: cover; }
+        #faster-site-built .content-col { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+        #faster-site-built h2 { font-size: 2rem; font-weight: 700; }
+
+        /* --- Section 6: Modest to Magnificent (Comparison Tables) --- */
+        #comparison { padding: 4rem 0; }
+        #comparison h2 { color: var(--rc-blue); font-size: 2rem; font-weight: 700; }
+        .comparison-table .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .comparison-table .card-header {
+            background-color: var(--rc-blue);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px 8px 0 0;
+        }
+        .comparison-table .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            padding: 0.75rem 1.25rem;
+        }
+        .comparison-table .icon-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .icon-dot.red { background-color: var(--rc-red); }
+        .icon-dot.green { background-color: #28a745; }
+
+        /* --- Section 7: Open the Door to a New Career (Video) --- */
+        #careers-video { background-color: var(--rc-blue); color: white; padding: 4rem 0; }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .video-placeholder {
+            /* Simulating the YouTube player preview */
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background: url("https://youtu.be/vkew-1KK3Sc?si=6w_kjDNiFQMj_dA5") no-repeat center center/cover;
+        }
+        .video-placeholder .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            color: var(--rc-red);
+            opacity: 0.8;
+        }
+        .careers-content h2 { font-size: 2rem; font-weight: 700; }
+
+        /* --- Section 8: Sign-up CTA --- */
+        #sign-up-cta { padding: 4rem 0; background-color: var(--rc-light-gray); }
+        #sign-up-cta img { max-height: 400px;}
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--rc-dark-blue);
+            color: #ccc;
+            padding-top: 3rem;
+            padding-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        footer a:hover {
+            color: white;
+        }
+        footer .logo-footer {
+            max-width: 150px;
+            margin-bottom: 1rem;
+        }
+        .footer-social-icons a {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            color: white;
+        }
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991.98px) {
+            .hero-section { padding: 4rem 0; }
+            #about-us .row, #faster-site-built .row { flex-direction: column; }
+            #about-us .img-col, #faster-site-built .img-col { order: 2; }
+            #about-us .content-col, #faster-site-built .content-col { order: 1; padding: 3rem 1.5rem; }
+            #highest-quality-homes .row { flex-direction: column-reverse; }
+            #highest-quality-homes .text-col { padding-top: 2rem; }
+            .comparison-table .col-md-6 { margin-bottom: 1.5rem; }
+            .careers-content { padding-top: 2rem; }
+            #sign-up-cta .row { flex-direction: column-reverse; }
+            #sign-up-cta .text-col { padding-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="C:\Users\acer\Downloads\cf01a2a8fae064dff9051f0de5e27d2dc39f67d0.png" alt="Ritz-Craft Logo">
+      </a>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Floor Plans</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Plan Collections</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Inspirations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Finishing Touches</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Why Ritz-Craft</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Find Your Builder</a></li>
+        </ul>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex gap-2">
+        <button class="btn btn-fav"><i class="bi bi-heart-fill"></i> My Favourites</button>
+        <button class="btn btn-login"><i class="bi bi-person-fill"></i> Builder Login</button>
+        <button class="btn btn-contact"><i class="bi bi-envelope-fill"></i> Contact</button>
+      </div>
+    </div>
+  </nav>
+
+   <div class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h1>Open the door to your family's forever.</h1>
+      <div>
+        <button class="btn btn-buyer btn-toggle">I'm a Home Buyer</button>
+        <button class="btn btn-builder btn-toggle">I'm a Builder</button>
+      </div>
+
+      <div class="search-bar mt-4">
+        <div class="row g-2">
+          <div class="col-md-2 col-6">
+            <select class="form-select">
+              <option>Style</option>
+            </select>
+          </div>
+          <div class="col-md-2 col-6">
+            <select class="form-select">
+              <option>Collection</option>
+            </select>
+          </div>
+          <div class="col-md-2 col-6">
+            <select class="form-select">
+              <option>Beds</option>
+            </select>
+          </div>
+          <div class="col-md-2 col-6">
+            <select class="form-select">
+              <option>Baths</option>
+            </select>
+          </div>
+          <div class="col-md-2 col-6">
+            <select class="form-select">
+              <option>Sq. Ft.</option>
+            </select>
+          </div>
+          <div class="col-md-2 col-6">
+            <input type="text" class="form-control" placeholder="Name of Plan">
+          </div>
+        </div>
+        <div class="text-end mt-3">
+          <button class="search-btn">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+    <section id="custom-building" class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>Custom Building Simplified™</h2>
+                <p>Custom and simple. It's the connection that defines the Ritz-Craft Advantage. As part of your team, we join the simplicity of pre-designed floor plans with the custom details you've dreamed of for years.</p>
+            </div>
+            <div class="col-lg-6 custom-building-img">
+                <img src="C:\Users\acer\OneDrive\Pictures\Screenshots 1\Screenshot 2025-10-26 151200.png" class="img-fluid" alt="Architect drawing on a blueprint.">
+            </div>
+        </div>
+    </section>
+
+    <section id="about-us" class="container-fluid">
+        <div class="row g-0">
+            <div class="col-lg-6 img-col">
+                <img src="C:\Users\acer\OneDrive\Pictures\istockphoto-505374210-612x612.jpg" alt="Owners Paul & Eric John">
+            </div>
+            <div class="col-lg-6 content-col">
+                <span class="text-uppercase" style="color:#ccc;">About Us</span>
+                <h2 class="mt-2 mb-4">With Us, It's Personal</h2>
+                <p>We're the largest family-owned, off-site modular home manufacturer in the United States. Although our company is large in size, our focus is on the finest details of your home. To continue delivering on our promises, we operate under three guiding principles:</p>
+                <ul>
+                    <li>Providing a safe and productive work environment for our employees.</li>
+                    <li>Developing strong, decade-long relationships with our independent builder network.</li>
+                    <li>Providing products and services to home buyers that are unparalleled in design, workmanship, and quality.</li>
+                </ul>
+                <a href="#" class="btn btn-rc-light-arrow">Why Ritz-Craft →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="highest-quality-homes" class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-col mb-4 mb-lg-0">
+                <h2 class="mb-4">The Highest-Quality Homes Built Today</h2>
+                <p>Ritz-Craft custom-designed homes utilize today's latest and most proven construction methods to meet or exceed state home building codes — and your dream home expectations. Your new home is completed on-site by one of our approved, independent home builders.</p>
+                <div class="mt-4 d-flex flex-wrap">
+                    <a href="#" class="btn btn-rc-red me-2 mb-2 mb-sm-0">View More About Our Quality</a>
+                    <a href="#" class="btn btn-rc-dark">Plan of the Month</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="C:\Users\acer\OneDrive\Pictures\Screenshots 1\house-5686330_960_720.jpg"class="img-fluid" alt="Completed home exterior.">
+            </div>
+        </div>
+    </section>
+
+    <section id="faster-site-built" class="container-fluid">
+        <div class="row g-0">
+            <div class="col-lg-6 img-col order-lg-2">
+                <img src="C:\Users\acer\OneDrive\Pictures\Screenshots 1\Screenshot 2025-10-26 153324.png"alt="Modular home factory interior.">
+            </div>
+            <div class="col-lg-6 content-col order-lg-1">
+                <h2 class="mb-4">Faster Than Site Built</h2>
+                <p>Because the building of your Ritz-Craft home is done indoors in a controlled environment, there are no weather delays. Your builder can prepare your site while we build your home, cutting weeks off the typical construction timeline.</p>
+                <a href="#" class="btn btn-rc-light-arrow">Check Out Our Timeline →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h2 class="mb-3">Modest to Magnificent</h2>
+                <p>Ritz-Craft custom-designed homes utilize today's latest and most proven construction methods to meet or exceed state home building codes — and your dream home expectations. Your new home is completed on-site by one of our approved, independent home builders.</p>
+            </div>
+        </div>
+        <div class="row comparison-table">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <span>Features</span>
+                            <span>1,000 - 2,499</span>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Base Price <span class="text-rc-red">$75,000+</span></li>
+                        <li class="list-group-item">Bed/Bath Options <span class="icon-dot green"></span></li>
+                        <li class="list-group-item">Site-Built Feel <span class="icon-dot green"></span></li>
+                        <li class="list-group-item">Fully Customized Kitchen & Baths <span class="icon-dot red"></span></li>
+                        <li class="list-group-item">Exterior Finish Selections <span class="icon-dot green"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <span>Features</span>
+                            <span>3,000 - 4,500+</span>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Base Price <span class="text-rc-red">1,600 - 4,500+</span></li>
+                        <li class="list-group-item">Foyer Entry <span class="icon-dot green"></span></li>
+                        <li class="list-group-item">Two Story <span class="icon-dot green"></span></li>
+                        <li class="list-group-item">Custom Kitchen/Bath Layouts <span class="icon-dot green"></span></li>
+                        <li class="list-group-item">Kitchen & Bath Upgrades <span class="icon-dot green"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-rc-red">Get Started →</a>
+        </div>
+    </section>
+
+    <section id="careers-video" class="container-fluid">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="video-wrapper">
+                        <div class="video-placeholder">
+                            <i class="fas fa-play-circle play-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 careers-content">
+                    <h2 class="mb-3">Open the Door to a New Career</h2>
+                    <p>Are you focused, detail-oriented, and skilled? We offer stable, high-quality manufacturing jobs with great benefits and a supportive environment.</p>
+                    <a href="#" class="btn btn-rc-light-arrow">See Job Openings →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="sign-up-cta">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-col">
+                    <h3 class="text-rc-blue">Sign-up to receive a free Planning Guide PDF</h3>
+                    <p>Includes prices, layouts, inspirations, floor plans, and valuable tips for planning your project.</p>
+                    <div class="mt-4">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <a href="#" class="btn btn-buyer btn-toggle">Verify your E-mail</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="C:\Users\acer\Downloads\bf357ccadac4a6cb188229db4dfa87c426fa2c51 (1).png" alt="Planning Guide PDF cover" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="C:\Users\acer\Downloads\cf01a2a8fae064dff9051f0de5e27d2dc39f67d0.png" alt="Ritz-Craft Logo" class="logo-footer">
+                    <p>Ritz-Craft is the largest family-owned, off-site modular home manufacturer in the United States.</p>
+                    <div class="footer-social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Quality</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Find a Builder</a>
+                </div>
+                <div class="col-6 col-lg-3 mb-4">
+                    <h5>Legal Links</h5>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Accessibility</a>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <p>543 Example St.<br> Mifflinburg, PA 17844</p>
+                    <p>Phone: (570) 966-XXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Ritz-Craft Corporation. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
